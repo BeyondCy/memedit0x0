@@ -35,13 +35,19 @@ std::vector<RUNNINGPROCESS> ProcessList()
         currentProcess.name = pe32.szExeFile;
         currentProcess.pid = pe32.th32ProcessID;
 
-        /*
+
         HICON icon = ExtractIcon((HINSTANCE)hProcess, pe32.szExeFile, 0);
         if (icon)
         {
             QPixmap p = QPixmap::fromWinHICON(icon);
             currentProcess.icon = p;
-        }*/
+            DestroyIcon(icon); // free memory handle
+        }/* */
+        else
+        {
+            DWORD err = GetLastError();
+            qDebug("Error: %d", err);
+        }
 
 
         processList.push_back(currentProcess);
@@ -50,3 +56,26 @@ std::vector<RUNNINGPROCESS> ProcessList()
 
     return processList;
 }
+/*
+' Grab the first window handle that Windows finds:
+ tempHwnd = FindWindow(vbNullString, vbNullString)
+
+ ' Loop until you find a match or there are no more window handles:
+ Do Until tempHwnd = 0
+    ' Check if no parent for this window
+    If GetParent(tempHwnd) = 0 Then
+       ' Check for PID match
+       If hInstance = ProcIDFromWnd(tempHwnd) Then
+          ' Return found handle
+          GetWinHandle = tempHwnd
+          ' Exit search loop
+          Exit Do
+       End If
+    End If
+
+    *.
+    ' Get the next window handle
+    tempHwnd = GetWindow(tempHwnd, GW_HWNDNEXT)
+ Loop
+End Function
+*/

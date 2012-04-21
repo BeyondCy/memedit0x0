@@ -10,11 +10,12 @@ class ProcessListWidget : public QTableWidget
     Q_OBJECT
 public:
     explicit ProcessListWidget(QWidget *parent = 0);
-    
-signals:
+
+private:
+    void fillProcessList();
     
 public slots:
-    void on_CellActivated(int row, int column, int prevR, int prevC);
+    void on_CurrentCellChanged(int row, int column, int prevR, int prevC);
     void on_CellDoubleClicked(int row, int column);
 
 signals:

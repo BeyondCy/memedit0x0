@@ -9,6 +9,9 @@ QT       += core gui
 TARGET = memedit0x0
 TEMPLATE = app
 
+LIBS += "C:\Program Files\Microsoft SDKs\Windows\v6.0A\Lib\shell32.Lib" \
+        "C:\Program Files\Microsoft SDKs\Windows\v6.0A\Lib\User32.Lib"
+INCLUDEPATH += "C:\Program Files\Microsoft SDKs\Windows\v6.0A\Lib\Include"
 
 SOURCES += main.cpp\
         mainwindow.cpp \
