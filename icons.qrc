@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/new/icons">
+        <file>icons/application_osx_terminal.png</file>
+        <file>icons/brick_edit.png</file>
+        <file>icons/coins.png</file>
+        <file>icons/coins_add.png</file>
+        <file>icons/coins_delete.png</file>
+        <file>icons/database_table.png</file>
+        <file>icons/help.png</file>
+    </qresource>
+</RCC>
