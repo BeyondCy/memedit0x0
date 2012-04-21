@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ProcessSelectedForm</class>
+ <widget class="QWidget" name="ProcessSelectedForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>265</width>
+    <height>268</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>80</y>
+     <width>192</width>
+     <height>141</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_4">
+    <item>
+     <widget class="QGroupBox" name="groupBoxByteSize">
+      <property name="title">
+       <string>Search Size</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QComboBox" name="comboBox">
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <property name="maxVisibleItems">
+          <number>10</number>
+         </property>
+         <item>
+          <property name="text">
+           <string>1 byte (unsigned char*)</string>
+          </property>
+          <property name="icon">
+           <iconset resource="icons.qrc">
+            <normaloff>:/new/icons/icons/bullet_purple.png</normaloff>:/new/icons/icons/bullet_purple.png</iconset>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>2 bytes (unsigned short*)</string>
+          </property>
+          <property name="icon">
+           <iconset resource="icons.qrc">
+            <normaloff>:/new/icons/icons/shape_align_center.png</normaloff>:/new/icons/icons/shape_align_center.png</iconset>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string extracomment="?">4 bytes (unsigned int*)</string>
+          </property>
+          <property name="icon">
+           <iconset resource="icons.qrc">
+            <normaloff>:/new/icons/icons/shape_group.png</normaloff>:/new/icons/icons/shape_group.png</iconset>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="title">
+       <string>Initial Value</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <widget class="QCheckBox" name="checkBox">
+           <property name="text">
+            <string>Unknown</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources>
+  <include location="icons.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>checkBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>lineEdit</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>304</x>
+     <y>148</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>316</x>
+     <y>169</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
