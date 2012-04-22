@@ -5,7 +5,6 @@ MemoryScanner::MemoryScanner(void)
     this->_hProc = NULL;
 	this->_head = NULL;
     this->_matchCount = -1;
-    this->_startAddress = 0;
 }
 
 MemoryScanner::~MemoryScanner(void)
@@ -34,15 +33,6 @@ MemoryCell* MemoryScanner::startScan(unsigned int pid, int data_size)
             if (VirtualQueryEx (this->_hProc, addr, &meminfo, sizeof(meminfo)) == 0)
                 break;
 
-            if (this->_startAddress == 0)
-                this->_startAddress = (unsigned char*)meminfo.BaseAddress;
-
-            unsigned long base = (unsigned long) meminfo.BaseAddress;
-            unsigned long start = (unsigned long) this->_startAddress;
-            qDebug("Base: %d - Start: %d", base);
-            unsigned long offset = (unsigned long)meminfo.BaseAddress - (unsigned long)this->_startAddress;
-            qDebug("offset: 0x%08x\n\n", offset);
-
 #define WRITABLE (PAGE_READWRITE | PAGE_WRITECOPY | PAGE_EXECUTE_READWRITE | PAGE_EXECUTE_WRITECOPY)
             if ((meminfo.State & MEM_COMMIT) && (meminfo.Protect & WRITABLE))
             {
@@ -57,12 +47,6 @@ MemoryCell* MemoryScanner::startScan(unsigned int pid, int data_size)
         }
     }
 	return this->_head;
-}
-
-const unsigned char* MemoryScanner::getStartAddress()
-{
-    const unsigned char* start = this->_startAddress;
-    return start;
 }
 
 

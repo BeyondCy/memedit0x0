@@ -5,14 +5,14 @@ MemoryListWidget::MemoryListWidget(QWidget *parent) :
 {
     this->setAlternatingRowColors(true);
     this->setSortingEnabled(true);
-    this->setColumnCount(4);
+    this->setColumnCount(3);
     QStringList labels;
-    labels << tr("Address") << tr("Offset") << tr("Hex Value") << tr("Decimal"); //<< tr("Description");
+    labels << tr("Address") << tr("Hex Value") << tr("Decimal"); //<< tr("Description");
 
     this->setHorizontalHeaderLabels(labels);
     this->setSelectionBehavior(QAbstractItemView::SelectRows);
     //this->verticalHeader()->hide();
-    this->horizontalHeader()->setResizeMode(2, QHeaderView::Stretch);
+    this->horizontalHeader()->setResizeMode(QHeaderView::Stretch);
     this->setShowGrid(true);
 
     //this->connect(this, SIGNAL(currentCellChanged(int,int,int,int)), this, SLOT(on_CurrentCellChanged(int,int,int,int)));
@@ -92,9 +92,8 @@ void MemoryListWidget::scanUpdated(MemoryScanner *scan)
                 //this->connect(decVal, SIGNAL(textEdited(QString)), this, SLOT(on_itemChanged(QString)));
 
                 this->setItem(row, 0, address);
-                this->setItem(row, 1, new QTableWidgetItem("wut"));
-                this->setItem(row, 2, hexVal);
-                this->setItem(row, 3, decVal);
+                this->setItem(row, 1, hexVal);
+                this->setItem(row, 2, decVal);
 
 
                 //qDebug ("0x%08x: 0x%08x (%d) \r\n", ((unsigned int)mb->getBaseAddress()) + offset, val, val);

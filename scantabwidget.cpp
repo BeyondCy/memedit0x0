@@ -128,6 +128,14 @@ void ScanTabWidget::on_actionIncreased_triggered()
 void ScanTabWidget::on_actionEquals_triggered()
 {
     int index = this->currentIndex();
-    this->scanners[index]->updateScan(COND_EQUALS, 0);
+
+    bool ok = false;
+    int searchVal = QInputDialog::getInt(this, tr("Find"), "Enter search value:",
+                                         0, -2147483647, 2147483647, 1, &ok);
+
+    if (!ok) // pressed cancel
+        return;
+
+    this->scanners[index]->updateScan(COND_EQUALS, searchVal);
     this->on_actionRefresh_triggered();
 }

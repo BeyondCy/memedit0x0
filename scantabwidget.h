@@ -3,6 +3,7 @@
 
 #include <QTabWidget>
 #include <QStatusBar>
+#include <QInputDialog>
 #include <QLabel>
 // QMap contains better functionality than std::map
 #include <QMap>

@@ -1,5 +1,6 @@
 #pragma once
 #include <windows.h>
+#include <BaseTsd.h>
 #include <QDebug>
 #include "MemoryCell.h"
 
@@ -17,12 +18,9 @@ public:
 
     MemoryCell* getHead() { return this->_head; }
 
-    const unsigned char* getStartAddress();
-
 private:
     MemoryCell* _head;
 	HANDLE _hProc; // process being scanned.
     int _matchCount;
 
-    unsigned char* _startAddress; // for finding offsets
 };

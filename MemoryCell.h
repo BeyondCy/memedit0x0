@@ -27,8 +27,6 @@ public:
 	int getSearchDataSize() { return this->_searchDataSize; }
     int getMatches() { return this->_matches; }
 
-    void setOffset(unsigned char* offset);
-    const unsigned char* getOffset();
 
 	void* getBaseAddress() { return this->_pBaseAddress; }
 
@@ -37,7 +35,6 @@ public:
 
 protected:
     HANDLE _hProc; // the process the cell belongs to.
-    unsigned char *_offset; // the address offset
 	unsigned char *_address; // the address of the cell
 	void* _pBaseAddress; // address for windows calls
 	int _size; // the size of the memory cell
