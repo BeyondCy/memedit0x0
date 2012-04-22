@@ -1,5 +1,6 @@
 #pragma once
 #include <windows.h>
+#include <QDebug>
 #include "MemoryCell.h"
 
 class MemoryScanner
