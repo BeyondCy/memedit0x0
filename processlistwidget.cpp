@@ -7,7 +7,7 @@ ProcessListWidget::ProcessListWidget(QWidget *parent) :
     this->setSortingEnabled(true);
     this->setColumnCount(2);
     QStringList labels;
-    labels << tr("PID") << tr("Executable"); //<< tr("Description");
+    labels << tr("PID") << tr("Binary"); //<< tr("Description");
     this->setHorizontalHeaderLabels(labels);
     this->verticalHeader()->hide();
     this->horizontalHeader()->setResizeMode(1, QHeaderView::Stretch);

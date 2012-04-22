@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     mainwindow.cpp \
     main.cpp \
     newscanwizard.cpp \
-    startscanpage.cpp
+    startscanpage.cpp \
+    memorylistwidget.cpp
 
 HEADERS  += mainwindow.h \
     scantabwidget.h \
@@ -33,7 +34,8 @@ HEADERS  += mainwindow.h \
     MemoryCell.h \
     mainwindow.h \
     newscanwizard.h \
-    startscanpage.h
+    startscanpage.h \
+    memorylistwidget.h
 
 FORMS    += mainwindow.ui \
     mainwindow.ui \

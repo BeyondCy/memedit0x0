@@ -7,7 +7,7 @@ typedef enum
     COND_UNCONDITIONAL,
     COND_EQUALS,
     COND_INCREASED,
-    COND_DECREASED,
+    COND_DECREASED
 } SEARCH_CONDITION;
 
 class MemoryCell

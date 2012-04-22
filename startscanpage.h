@@ -17,6 +17,10 @@ public:
     ~StartScanPage();
 
     void setTargetProcess(RUNNINGPROCESS p);
+
+    int searchSize();
+    int initialValue();
+    bool useInitial();
     
 private:
     Ui::StartScanPage *ui;

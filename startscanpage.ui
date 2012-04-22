@@ -46,6 +46,13 @@
             <height>20</height>
            </size>
           </property>
+          <property name="styleSheet">
+           <string notr="true">background-repeat:no-repeat;
+border:1px solid #000;
+background-color:black;
+font-weight:bold;
+color:gold</string>
+          </property>
           <property name="text">
            <string>6072</string>
           </property>
@@ -73,10 +80,13 @@
            <bool>false</bool>
           </property>
           <property name="styleSheet">
-           <string notr="true">background-image: url(:/new/icons/icons/database_table.png);
-background-repeat:no-repeat;
+           <string notr="true">background-repeat:no-repeat;
 padding-left:20px;
-</string>
+border:1px solid #000;
+background-color:black;
+font-weight:bold;
+color:gold;
+background-image:url(:/new/icons/icons/application_put.png);</string>
           </property>
           <property name="text">
            <string>notepad.exe</string>

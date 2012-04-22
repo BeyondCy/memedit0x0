@@ -19,12 +19,22 @@ NewScanWizard::NewScanWizard(QWidget *parent) :
     this->setButtonText(QWizard::FinishButton, "Start Scan");
 
     this->connect(this, SIGNAL(currentIdChanged(int)), this, SLOT(on_currentIdChanged(int)));
+    this->connect(this, SIGNAL(accepted()), this, SLOT(on_accepted()));
     //this->connect(this->button(QWizard::NextButton), SIGNAL(pressed()), this, SLOT();
 }
 
 NewScanWizard::~NewScanWizard()
 {
     delete ui;
+}
+
+void NewScanWizard::on_accepted()
+{
+    RUNNINGPROCESS p = this->processesListWidget->selectedProcess();
+    int searchSize = this->startScan->searchSize();
+    bool useInitial = this->startScan->useInitial();
+    int initialValue = this->startScan->initialValue();
+    emit processSelected(p, searchSize, useInitial, initialValue);
 }
 
 void NewScanWizard::on_currentIdChanged(int id)

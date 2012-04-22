@@ -27,10 +27,8 @@ public slots:
 
     void on_actionNew_Scan_triggered();
     void on_NewScan_rejected();
-    void on_NewScan_accepted();
 
-    void on_ProcessSelected(RUNNINGPROCESS process);
-
+    void on_processSelected(RUNNINGPROCESS p, int searchSize, bool useInitial, int initialValue);
 
 private:
     QMap<int, MemoryScanner*> scanners;

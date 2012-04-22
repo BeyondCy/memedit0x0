@@ -18,15 +18,27 @@ void ScanTabWidget::on_tabWidget_currentChanged(int index)
     this->currentScanner = index;
 }
 
-void ScanTabWidget::on_NewScan_accepted()
+void ScanTabWidget::on_processSelected(RUNNINGPROCESS p, int searchSize, bool useInitial, int initialValue)
 {
     ProcessListWidget* table = new ProcessListWidget(this);
     int index = this->addTab(table, QIcon(":/new/icons/icons/help.png"), "New Scan");
-    this->connect(table, SIGNAL(processSelected(RUNNINGPROCESS)), this, SLOT(on_ProcessSelected(RUNNINGPROCESS)));
     this->scanners[index] = new MemoryScanner();
 
     if (this->count() == 1) // 1st open tab
         emit haveOpenScans(true);  // only need to send it once
+
+    qDebug("PID: %d - searchsize: %d - useinitial: %d - initVal: %d", p.pid, searchSize, useInitial, initialValue);
+    try {
+        this->scanners[index]->startScan(p.pid, searchSize);
+        SEARCH_CONDITION cond = (useInitial) ? COND_EQUALS : COND_UNCONDITIONAL;
+        this->scanners[index]->updateScan(cond, initialValue);
+    }catch(...){
+        qDebug("Unhandled exception occurred...");
+    }
+
+    this->setTabText(index, p.name);
+    this->setTabIcon(index, p.icon);
+    this->setCurrentIndex(index);
 
     this->on_NewScan_rejected(); // just does cleanup
 }
@@ -42,18 +54,10 @@ void ScanTabWidget::on_actionNew_Scan_triggered()
     this->newScan->show();
 
     this->connect(this->newScan, SIGNAL(rejected()), this, SLOT(on_NewScan_rejected()));
-    this->connect(this->newScan, SIGNAL(accepted()), this, SLOT(on_NewScan_accepted()));
+    this->connect(this->newScan, SIGNAL(processSelected(RUNNINGPROCESS,int,bool,int)),
+                  this, SLOT(on_processSelected(RUNNINGPROCESS,int,bool,int)));
     /*
     */
-}
-
-void ScanTabWidget::on_ProcessSelected(RUNNINGPROCESS p)
-{
-    int index = this->currentIndex();
-    this->setTabText(index, p.name);
-    this->setTabIcon(index, p.icon);
-
-    // selected form time
 }
 
 void ScanTabWidget::on_tabWidget_tabCloseRequested(int index)

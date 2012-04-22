@@ -21,6 +21,10 @@ public:
 
 public slots:
     void on_currentIdChanged(int);
+    void on_accepted();
+
+signals:
+    void processSelected(RUNNINGPROCESS p, int searchSize, bool useInitial, int initialValue);
     
 private:
     Ui::NewScanWizard *ui;
