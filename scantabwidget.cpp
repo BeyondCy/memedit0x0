@@ -20,8 +20,11 @@ void ScanTabWidget::on_tabWidget_currentChanged(int index)
 
 void ScanTabWidget::on_processSelected(RUNNINGPROCESS p, int searchSize, bool useInitial, int initialValue)
 {
-    ProcessListWidget* table = new ProcessListWidget(this);
-    int index = this->addTab(table, QIcon(":/new/icons/icons/help.png"), "New Scan");
+    MemoryListWidget* memoryTable = new MemoryListWidget(this);
+    int index = this->addTab(memoryTable, p.icon, p.name);
+    this->connect(this, SIGNAL(scanUpdated(MemoryCell*)),
+                  memoryTable, SLOT(scanUpdated(MemoryCell*)));
+    this->setCurrentIndex(index);
     this->scanners[index] = new MemoryScanner();
 
     if (this->count() == 1) // 1st open tab
@@ -31,14 +34,12 @@ void ScanTabWidget::on_processSelected(RUNNINGPROCESS p, int searchSize, bool us
     try {
         this->scanners[index]->startScan(p.pid, searchSize);
         SEARCH_CONDITION cond = (useInitial) ? COND_EQUALS : COND_UNCONDITIONAL;
-        this->scanners[index]->updateScan(cond, initialValue);
+        MemoryCell* head = this->scanners[index]->updateScan(cond, initialValue);
+
+        emit scanUpdated(head);
     }catch(...){
         qDebug("Unhandled exception occurred...");
     }
-
-    this->setTabText(index, p.name);
-    this->setTabIcon(index, p.icon);
-    this->setCurrentIndex(index);
 
     this->on_NewScan_rejected(); // just does cleanup
 }

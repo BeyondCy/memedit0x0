@@ -49,4 +49,12 @@ void MainWindow::on_scanTab_haveOpenScans(bool havescans)
     this->ui->actionSearch_Decreased->setEnabled(havescans);
     this->ui->actionSearch_Increased->setEnabled(havescans);
     this->ui->actionSearch_Value->setEnabled(havescans);
+
+}
+
+void MainWindow::scanCountUpdated(int num)
+{
+    QString s = "%d matches found.";
+    s.arg(QString::number(num));
+    this->ui->statusBar->showMessage(s);
 }

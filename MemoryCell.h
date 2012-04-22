@@ -25,6 +25,7 @@ public:
 
 	int getSize() { return this->_size; }
 	int getSearchDataSize() { return this->_searchDataSize; }
+    int getMatches() { return this->_matches; }
 
 	void* getBaseAddress() { return this->_pBaseAddress; }
 

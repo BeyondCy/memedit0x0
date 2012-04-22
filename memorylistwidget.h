@@ -1,9 +1,13 @@
 #ifndef MEMORYLISTWIDGET_H
 #define MEMORYLISTWIDGET_H
 
-#include <QWidget>
+#include <stdio.h>
 
-class MemoryListWidget : public QWidget
+#include <QTableWidget>
+#include <QHeaderView>
+#include "MemoryScanner.h"
+
+class MemoryListWidget : public QTableWidget
 {
     Q_OBJECT
 public:
@@ -12,6 +16,7 @@ public:
 signals:
     
 public slots:
+    void scanUpdated(MemoryCell* head);
     
 };
 

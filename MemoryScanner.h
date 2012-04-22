@@ -11,6 +11,8 @@ public:
 	MemoryCell* startScan(unsigned int pid, int data_size);
 	MemoryCell* updateScan(SEARCH_CONDITION condition, unsigned int val);
 
+    int getMatchCount();
+
 private:
 	MemoryCell* _head;
 

@@ -60,3 +60,17 @@ MemoryCell* MemoryScanner::updateScan(SEARCH_CONDITION condition, unsigned int v
     }
 	return this->_head;
 }
+
+int MemoryScanner::getMatchCount()
+{
+    MemoryCell *mb = this->_head;
+    int count = 0;
+
+    while (mb)
+    {
+        count += mb->getMatches();
+        mb = mb->getNext();
+    }
+
+    return count;
+}

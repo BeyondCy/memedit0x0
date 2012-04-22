@@ -8,6 +8,7 @@
 #include <QMap>
 
 #include "newscanwizard.h"
+#include "memorylistwidget.h"
 #include "processlistwidget.h"
 #include "MemoryScanner.h"
 
@@ -19,6 +20,7 @@ public:
     
 signals:
     void haveOpenScans(bool);
+    void scanUpdated(MemoryCell*);
     
 public slots:
     void on_tabWidget_tabCloseRequested(int index);
