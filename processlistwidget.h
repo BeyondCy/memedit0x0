@@ -19,7 +19,8 @@ public slots:
     void on_CellDoubleClicked(int row, int column);
 
 signals:
-    void processSelected(int pid, QString name);
+    void processSelected(RUNNINGPROCESS process);
+    void processSelected();
     
 };
 

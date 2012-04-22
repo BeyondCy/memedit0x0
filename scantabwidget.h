@@ -2,9 +2,13 @@
 #define SCANTABWIDGET_H
 
 #include <QTabWidget>
+#include <QStackedWidget>
+#include <QSignalMapper>
 // QMap contains better functionality than std::map
 #include <QMap>
 
+#include "newscanwizard.h"
+#include "processselectedform.h"
 #include "processlistwidget.h"
 #include "MemoryScanner.h"
 
@@ -23,7 +27,7 @@ public slots:
 
     void on_actionNew_Scan_triggered();
 
-    void on_ProcessSelected(int pid, QString name);
+    void on_ProcessSelected(RUNNINGPROCESS process);
 
 
 private:

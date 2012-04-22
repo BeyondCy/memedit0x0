@@ -21,7 +21,9 @@ SOURCES += main.cpp\
     MemoryScanner.cpp \
     MemoryCell.cpp \
     mainwindow.cpp \
-    main.cpp
+    main.cpp \
+    newscanwizard.cpp \
+    startscanpage.cpp
 
 HEADERS  += mainwindow.h \
     scantabwidget.h \
@@ -29,10 +31,14 @@ HEADERS  += mainwindow.h \
     ProcessList.h \
     MemoryScanner.h \
     MemoryCell.h \
-    mainwindow.h
+    mainwindow.h \
+    newscanwizard.h \
+    startscanpage.h
 
 FORMS    += mainwindow.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    newscanwizard.ui \
+    startscanpage.ui
 
 OTHER_FILES += \
     memedit0x0.pro.user \

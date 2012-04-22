@@ -23,7 +23,7 @@ void MainWindow::on_action_Quit_triggered()
 }
 
 void MainWindow::closeEvent(QCloseEvent *e)
-{
+{/*
     QMessageBox m;
     m.setText("Are you sure you wish to exit?");
     m.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
@@ -33,6 +33,7 @@ void MainWindow::closeEvent(QCloseEvent *e)
         e->accept();
     else
         e->ignore();
+        */
 }
 
 void MainWindow::on_actionAbout_triggered()

@@ -7,5 +7,8 @@
         <file>icons/coins_delete.png</file>
         <file>icons/database_table.png</file>
         <file>icons/help.png</file>
+        <file>icons/bullet_purple.png</file>
+        <file>icons/shape_align_center.png</file>
+        <file>icons/shape_group.png</file>
     </qresource>
 </RCC>

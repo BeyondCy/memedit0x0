@@ -2,15 +2,16 @@
 
 MemoryScanner::MemoryScanner(void)
 {
+    this->_hProc = NULL;
 	this->_head = NULL;
 }
 
 MemoryScanner::~MemoryScanner(void)
 {
-	if (this->_hProc)
+    if (this->_hProc)
 		CloseHandle (this->_hProc);
 
-    while (this->_head)
+    while (this->_head != NULL)
     {
         MemoryCell *cell = this->_head;
         this->_head = this->_head->getNext();

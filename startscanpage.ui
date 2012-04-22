@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>StartScanPage</class>
+ <widget class="QWizardPage" name="StartScanPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>240</width>
+    <height>320</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>WizardPage</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_5">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout_4">
+     <item>
+      <widget class="QGroupBox" name="groupBoxByteSize">
+       <property name="title">
+        <string>Search Size</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QComboBox" name="comboBoxSearchSize">
+          <property name="layoutDirection">
+           <enum>Qt::LeftToRight</enum>
+          </property>
+          <property name="currentIndex">
+           <number>2</number>
+          </property>
+          <property name="maxVisibleItems">
+           <number>10</number>
+          </property>
+          <item>
+           <property name="text">
+            <string>1 byte (unsigned char*)</string>
+           </property>
+           <property name="icon">
+            <iconset resource="icons.qrc">
+             <normaloff>:/new/icons/icons/bullet_purple.png</normaloff>:/new/icons/icons/bullet_purple.png</iconset>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>2 bytes (unsigned short*)</string>
+           </property>
+           <property name="icon">
+            <iconset resource="icons.qrc">
+             <normaloff>:/new/icons/icons/shape_align_center.png</normaloff>:/new/icons/icons/shape_align_center.png</iconset>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string extracomment="?">4 bytes (unsigned int*)</string>
+           </property>
+           <property name="icon">
+            <iconset resource="icons.qrc">
+             <normaloff>:/new/icons/icons/shape_group.png</normaloff>:/new/icons/icons/shape_group.png</iconset>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox">
+       <property name="title">
+        <string>Initial Value</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QCheckBox" name="checkBoxUknownAll">
+            <property name="text">
+             <string>Unknown/All</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEditInitialValue">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>152</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="icons.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>checkBoxUknownAll</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>lineEditInitialValue</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>119</x>
+     <y>103</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>119</x>
+     <y>127</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

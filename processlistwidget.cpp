@@ -16,21 +16,24 @@ ProcessListWidget::ProcessListWidget(QWidget *parent) :
     this->connect(this, SIGNAL(currentCellChanged(int,int,int,int)), this, SLOT(on_CurrentCellChanged(int,int,int,int)));
     this->connect(this, SIGNAL(cellDoubleClicked(int,int)), this, SLOT(on_CellDoubleClicked(int,int)));
 
+    this->setSelectionBehavior(QAbstractItemView::SelectRows);
     fillProcessList(); //
 }
 
 void ProcessListWidget::on_CurrentCellChanged(int row, int column, int prevR, int prevC)
 {
     this->selectRow(row);
-    this->item(row, column-1)->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
    //this->item(row, column)->setText("wut");
 }
 
 void ProcessListWidget::on_CellDoubleClicked(int row, int column)
 {
-    int pid = this->item(row, 0)->text().toInt();
-    QString name = this->item(row, 1)->text();
-    emit processSelected(pid, name);
+    RUNNINGPROCESS p;
+    p.pid =  this->item(row, 0)->text().toInt();
+    p.name = this->item(row, 1)->text();
+    p.icon = this->item(row, 1)->icon();
+    emit processSelected(p);
+    emit processSelected();
 }
 
 void ProcessListWidget::fillProcessList()
@@ -45,10 +48,10 @@ void ProcessListWidget::fillProcessList()
         QTableWidgetItem *pid = new QTableWidgetItem(QString::number(processes[i].pid));
         QTableWidgetItem *name =
                 new QTableWidgetItem(/*QIcon(":/new/icons/icons/help.png"),*/
-                                     QString::fromStdWString(processes[i].name));
+                                     processes[i].name);
 
 
-            name->setIcon(QIcon(processes[i].icon));
+            name->setIcon(processes[i].icon);
 
         pid->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
         name->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
@@ -56,7 +59,6 @@ void ProcessListWidget::fillProcessList()
         this->setItem(row, 0, pid);
         this->setItem(row, 1, name);
 
-        qDebug("%d - %s", processes[i].pid, processes[i].name);
         row++;
     }
 

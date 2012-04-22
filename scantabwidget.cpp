@@ -20,20 +20,42 @@ void ScanTabWidget::on_tabWidget_currentChanged(int index)
 
 void ScanTabWidget::on_actionNew_Scan_triggered()
 {
-    ProcessListWidget* table = new ProcessListWidget(this);
-    int index = this->addTab(table, QIcon(":/new/icons/icons/help.png"), "New Scan");
-    this->connect(table, SIGNAL(processSelected(int, QString)), this, SLOT(on_ProcessSelected(int, QString)));
+    NewScanWizard* newScan = new NewScanWizard(this);
+    newScan->show();
+    /*
+    QStackedWidget *sw = new QStackedWidget(this);
+    ProcessListWidget* table = new ProcessListWidget(sw);
+    ProcessSelectedForm* selectedForm = new ProcessSelectedForm(sw);
+
+    ProcessListWidget* table2 = new ProcessListWidget();
+    table2->show();
+
+
+
+    sw->addWidget(table);
+    sw->addWidget(selectedForm);
+    //sw->addWidget(scannerTable);
+
+    QSignalMapper *m = new QSignalMapper(this);
+
+    sw->connect(table, SIGNAL(processSelected()), m, SLOT(map()));
+    sw->connect(m, SIGNAL(mapped(int)), sw, SLOT(setCurrentIndex(int)));
+    sw->setCurrentIndex(1);
+
+
+    int index = this->addTab(sw, QIcon(":/new/icons/icons/help.png"), "New Scan");
+    this->connect(table, SIGNAL(processSelected(RUNNINGPROCESS)), this, SLOT(on_ProcessSelected(RUNNINGPROCESS)));
     this->scanners[index] = new MemoryScanner();
+    */
 }
 
-void ScanTabWidget::on_ProcessSelected(int pid, QString name)
+void ScanTabWidget::on_ProcessSelected(RUNNINGPROCESS p)
 {
-    qDebug("Got signal from the tablewidget.");
     int index = this->currentIndex();
-    this->setTabText(index, name.append(" - ").append(QString::number(pid)));
-    ProcessListWidget* w = (ProcessListWidget*) this->widget(index);
-    this->setCurrentWidget(0);
-    //delete w;
+    this->setTabText(index, p.name);
+    this->setTabIcon(index, p.icon);
+
+    // selected form time
 }
 
 void ScanTabWidget::on_tabWidget_tabCloseRequested(int index)

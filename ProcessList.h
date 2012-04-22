@@ -10,17 +10,18 @@
 #include <string>
 #include <iostream>
 
-#include <QPixmap>
+#include <QIcon>
 
 typedef struct _RUNNINGPROCESS {
     unsigned int pid;
-    std::wstring name;
+    QString name;
     std::string description;
-    QPixmap icon;
+    QIcon icon;
 } RUNNINGPROCESS;
 
 
 std::vector<RUNNINGPROCESS> ProcessList();
+HWND hInstance2hWnd(HINSTANCE hIstance);
 
 
 #endif // PROCESSLIST_H
