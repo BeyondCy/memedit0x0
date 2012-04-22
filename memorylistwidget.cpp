@@ -8,16 +8,35 @@ MemoryListWidget::MemoryListWidget(QWidget *parent) :
     this->setColumnCount(4);
     QStringList labels;
     labels << tr("Address") << tr("Offset") << tr("Hex Value") << tr("Decimal"); //<< tr("Description");
+
     this->setHorizontalHeaderLabels(labels);
-    this->verticalHeader()->hide();
+    this->setSelectionBehavior(QAbstractItemView::SelectRows);
+    //this->verticalHeader()->hide();
     this->horizontalHeader()->setResizeMode(2, QHeaderView::Stretch);
     this->setShowGrid(true);
 
-    this->connect(this, SIGNAL(currentCellChanged(int,int,int,int)), this, SLOT(on_CurrentCellChanged(int,int,int,int)));
-    this->connect(this, SIGNAL(cellDoubleClicked(int,int)), this, SLOT(on_CellDoubleClicked(int,int)));
+    //this->connect(this, SIGNAL(currentCellChanged(int,int,int,int)), this, SLOT(on_CurrentCellChanged(int,int,int,int)));
+    //this->connect(this, SIGNAL(cellDoubleClicked(int,int)), this, SLOT(on_CellDoubleClicked(int,int)));
 
-    this->blockSignals(true);
     //this->setSelectionBehavior(QAbstractItemView::SelectRows);
+}
+
+void MemoryListWidget::on_cellDoubleClicked(int r, int c)
+{
+    //this->connect(this, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(on_itemChanged(QTableWidgetItem*)));
+}
+
+void MemoryListWidget::on_itemChanged(QString item)
+{
+    int row = this->currentRow();
+    qDebug("currentrow: %d", row);
+    if (row == -1)
+        return;
+    QString addr = this->item(row, 0)->text();
+    QLineEdit* lineEdit = (QLineEdit*)this->cellWidget(row, 3);
+    int data = lineEdit->text().toInt();
+    qDebug("Write %d at %d (0x%08x)", data, addr, addr);
+
 }
 
 void MemoryListWidget::scanUpdated(MemoryScanner *scan)
@@ -42,8 +61,11 @@ void MemoryListWidget::scanUpdated(MemoryScanner *scan)
     unsigned int offset;
     MemoryCell *mb = scan->getHead();
 
-    this->clear();
+    //this->clear();
     this->setRowCount(0);
+
+    // ToDo: Block signals during a lineedit.
+    // this->blockSignals(true);
 
     int row = 0;
     while (mb)
@@ -59,13 +81,18 @@ void MemoryListWidget::scanUpdated(MemoryScanner *scan)
 
                 sprintf(buffer, "0x%08x", ((unsigned int)mb->getBaseAddress()) + offset);
                 QTableWidgetItem *address = new QTableWidgetItem(QString(buffer));
-                address->setFlags(Qt::NoItemFlags);
+                address->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
 
                 sprintf(buffer, "0x%08x", val);
                 QTableWidgetItem *hexVal = new QTableWidgetItem(QString(buffer));
 
+
                 QTableWidgetItem *decVal = new QTableWidgetItem(QString::number(val));
+
+                //this->connect(decVal, SIGNAL(textEdited(QString)), this, SLOT(on_itemChanged(QString)));
+
                 this->setItem(row, 0, address);
+                this->setItem(row, 1, new QTableWidgetItem("wut"));
                 this->setItem(row, 2, hexVal);
                 this->setItem(row, 3, decVal);
 

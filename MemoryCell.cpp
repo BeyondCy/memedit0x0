@@ -162,3 +162,14 @@ void MemoryCell::poke(/*int data_size, unsigned int offset,*/ unsigned int val)
         printf ("poke failed\r\n");
     }
 }
+
+void MemoryCell::setOffset(unsigned char* offset)
+{
+    this->_offset = offset;
+}
+
+const unsigned char* MemoryCell::getOffset()
+{
+    const unsigned char* offset = this->_offset;
+    return offset;
+}

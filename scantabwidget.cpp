@@ -109,3 +109,25 @@ void ScanTabWidget::on_actionRefresh_triggered()
 
     this->disconnect(memoryTable);
 }
+
+
+void ScanTabWidget::on_actionDecreased_triggered()
+{
+    int index = this->currentIndex();
+    this->scanners[index]->updateScan(COND_DECREASED, 0);
+    this->on_actionRefresh_triggered();
+}
+
+void ScanTabWidget::on_actionIncreased_triggered()
+{
+    int index = this->currentIndex();
+    this->scanners[index]->updateScan(COND_INCREASED, 0);
+    this->on_actionRefresh_triggered();
+}
+
+void ScanTabWidget::on_actionEquals_triggered()
+{
+    int index = this->currentIndex();
+    this->scanners[index]->updateScan(COND_EQUALS, 0);
+    this->on_actionRefresh_triggered();
+}

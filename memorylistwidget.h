@@ -5,6 +5,7 @@
 
 #include <QTableWidget>
 #include <QMessageBox>
+#include <QLineEdit>
 #include <QHeaderView>
 #include "MemoryScanner.h"
 
@@ -18,7 +19,9 @@ signals:
     
 public slots:
     void scanUpdated(MemoryScanner* scan);
-    
+
+    void on_itemChanged(QString item);
+    void on_cellDoubleClicked(int r, int c);
 };
 
 #endif // MEMORYLISTWIDGET_H

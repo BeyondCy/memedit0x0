@@ -11,6 +11,9 @@ MainWindow::MainWindow(QWidget *parent) :
     this->connect(scanTabs, SIGNAL(haveOpenScans(bool)), this, SLOT(on_scanTab_haveOpenScans(bool)));
     this->connect(this->ui->actionNew_Scan, SIGNAL(triggered()), scanTabs, SLOT(on_actionNew_Scan_triggered()));
     this->connect(this->ui->actionRefresh, SIGNAL(triggered()), scanTabs, SLOT(on_actionRefresh_triggered()));
+    this->connect(this->ui->actionSearch_Increased, SIGNAL(triggered()), scanTabs, SLOT(on_actionIncreased_triggered()));
+    this->connect(this->ui->actionSearch_Decreased, SIGNAL(triggered()), scanTabs, SLOT(on_actionDecreased_triggered()));
+    this->connect(this->ui->actionSearch_Value, SIGNAL(triggered()), scanTabs, SLOT(on_actionEquals_triggered()));
     this->setCentralWidget(scanTabs);
 }
 

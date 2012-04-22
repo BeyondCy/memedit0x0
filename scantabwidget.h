@@ -31,6 +31,9 @@ public slots:
     void on_NewScan_rejected();
 
     void on_actionRefresh_triggered();
+    void on_actionDecreased_triggered();
+    void on_actionIncreased_triggered();
+    void on_actionEquals_triggered();
 
     void on_processSelected(RUNNINGPROCESS p, int searchSize, bool useInitial, int initialValue);
     void on_scanUpdated(MemoryScanner *scan);
