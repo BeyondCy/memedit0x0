@@ -12,3 +12,9 @@ StartScanPage::~StartScanPage()
 {
     delete ui;
 }
+
+void StartScanPage::setTargetProcess(RUNNINGPROCESS p)
+{
+    this->ui->lineEditPID->setText(QString::number(p.pid));
+    this->ui->lineEditProcessName->setText(p.name);
+}

@@ -10,5 +10,9 @@
         <file>icons/bullet_purple.png</file>
         <file>icons/shape_align_center.png</file>
         <file>icons/shape_group.png</file>
+        <file>icons/refresh.png</file>
+        <file>icons/wrench.png</file>
+        <file>icons/application_put.png</file>
+        <file>icons/application_xp.png</file>
     </qresource>
 </RCC>

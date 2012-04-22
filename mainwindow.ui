@@ -37,6 +37,7 @@
      <string>&amp;Scan</string>
     </property>
     <addaction name="actionNew_Scan"/>
+    <addaction name="actionRefresh"/>
     <addaction name="separator"/>
     <addaction name="actionSearch_Value"/>
     <addaction name="actionSearch_Increased"/>
@@ -88,6 +89,7 @@
    <addaction name="actionSearch_Value"/>
    <addaction name="actionSearch_Increased"/>
    <addaction name="actionSearch_Decreased"/>
+   <addaction name="actionRefresh"/>
    <addaction name="actionPoke_Address"/>
   </widget>
   <action name="actionNew_Scan">
@@ -109,6 +111,9 @@
    </property>
   </action>
   <action name="actionSearch_Value">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="icons.qrc">
      <normaloff>:/new/icons/icons/coins.png</normaloff>:/new/icons/icons/coins.png</iconset>
@@ -124,6 +129,9 @@
    </property>
   </action>
   <action name="actionSearch_Increased">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="icons.qrc">
      <normaloff>:/new/icons/icons/coins_add.png</normaloff>:/new/icons/icons/coins_add.png</iconset>
@@ -139,6 +147,9 @@
    </property>
   </action>
   <action name="actionSearch_Decreased">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="icons.qrc">
      <normaloff>:/new/icons/icons/coins_delete.png</normaloff>:/new/icons/icons/coins_delete.png</iconset>
@@ -154,6 +165,9 @@
    </property>
   </action>
   <action name="actionPoke_Address">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="icons.qrc">
      <normaloff>:/new/icons/icons/brick_edit.png</normaloff>:/new/icons/icons/brick_edit.png</iconset>
@@ -175,6 +189,10 @@
    <property name="checked">
     <bool>true</bool>
    </property>
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/new/icons/icons/wrench.png</normaloff>:/new/icons/icons/wrench.png</iconset>
+   </property>
    <property name="text">
     <string>Toolbar</string>
    </property>
@@ -188,8 +206,30 @@
    </property>
   </action>
   <action name="actionAbout">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/new/icons/icons/help.png</normaloff>:/new/icons/icons/help.png</iconset>
+   </property>
    <property name="text">
     <string>About</string>
+   </property>
+  </action>
+  <action name="actionRefresh">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/new/icons/icons/refresh.png</normaloff>:/new/icons/icons/refresh.png</iconset>
+   </property>
+   <property name="text">
+    <string>Refresh Scan</string>
+   </property>
+   <property name="toolTip">
+    <string>Refresh values</string>
+   </property>
+   <property name="shortcut">
+    <string>F5</string>
    </property>
   </action>
  </widget>

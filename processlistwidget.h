@@ -11,6 +11,8 @@ class ProcessListWidget : public QTableWidget
 public:
     explicit ProcessListWidget(QWidget *parent = 0);
 
+    RUNNINGPROCESS selectedProcess();
+
 private:
     void fillProcessList();
     
@@ -19,8 +21,6 @@ public slots:
     void on_CellDoubleClicked(int row, int column);
 
 signals:
-    void processSelected(RUNNINGPROCESS process);
-    void processSelected();
     
 };
 

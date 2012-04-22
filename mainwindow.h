@@ -25,6 +25,8 @@ private slots:
 
     void on_actionAbout_triggered();
 
+    void on_scanTab_haveOpenScans(bool);
+
 private:
     Ui::MainWindow *ui;
 

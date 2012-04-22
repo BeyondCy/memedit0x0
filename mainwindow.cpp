@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     ScanTabWidget* scanTabs = new ScanTabWidget(this);
+    this->connect(scanTabs, SIGNAL(haveOpenScans(bool)), this, SLOT(on_scanTab_haveOpenScans(bool)));
     this->connect(this->ui->actionNew_Scan, SIGNAL(triggered()), scanTabs, SLOT(on_actionNew_Scan_triggered()));
     this->setCentralWidget(scanTabs);
 }
@@ -41,3 +42,11 @@ void MainWindow::on_actionAbout_triggered()
     QMessageBox::information(this, "About MemEdit0x0 v0.1", "For science...", QMessageBox::Ok);
 }
 
+void MainWindow::on_scanTab_haveOpenScans(bool havescans)
+{
+    this->ui->actionPoke_Address->setEnabled(havescans);
+    this->ui->actionRefresh->setEnabled(havescans);
+    this->ui->actionSearch_Decreased->setEnabled(havescans);
+    this->ui->actionSearch_Increased->setEnabled(havescans);
+    this->ui->actionSearch_Value->setEnabled(havescans);
+}

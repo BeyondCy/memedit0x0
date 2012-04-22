@@ -18,34 +18,32 @@ void ScanTabWidget::on_tabWidget_currentChanged(int index)
     this->currentScanner = index;
 }
 
-void ScanTabWidget::on_actionNew_Scan_triggered()
+void ScanTabWidget::on_NewScan_accepted()
 {
-    NewScanWizard* newScan = new NewScanWizard(this);
-    newScan->show();
-    /*
-    QStackedWidget *sw = new QStackedWidget(this);
-    ProcessListWidget* table = new ProcessListWidget(sw);
-    ProcessSelectedForm* selectedForm = new ProcessSelectedForm(sw);
-
-    ProcessListWidget* table2 = new ProcessListWidget();
-    table2->show();
-
-
-
-    sw->addWidget(table);
-    sw->addWidget(selectedForm);
-    //sw->addWidget(scannerTable);
-
-    QSignalMapper *m = new QSignalMapper(this);
-
-    sw->connect(table, SIGNAL(processSelected()), m, SLOT(map()));
-    sw->connect(m, SIGNAL(mapped(int)), sw, SLOT(setCurrentIndex(int)));
-    sw->setCurrentIndex(1);
-
-
-    int index = this->addTab(sw, QIcon(":/new/icons/icons/help.png"), "New Scan");
+    ProcessListWidget* table = new ProcessListWidget(this);
+    int index = this->addTab(table, QIcon(":/new/icons/icons/help.png"), "New Scan");
     this->connect(table, SIGNAL(processSelected(RUNNINGPROCESS)), this, SLOT(on_ProcessSelected(RUNNINGPROCESS)));
     this->scanners[index] = new MemoryScanner();
+
+    if (this->count() == 1) // 1st open tab
+        emit haveOpenScans(true);  // only need to send it once
+
+    this->on_NewScan_rejected(); // just does cleanup
+}
+
+void ScanTabWidget::on_NewScan_rejected()
+{
+    delete this->newScan;
+}
+
+void ScanTabWidget::on_actionNew_Scan_triggered()
+{
+    this->newScan = new NewScanWizard(this);
+    this->newScan->show();
+
+    this->connect(this->newScan, SIGNAL(rejected()), this, SLOT(on_NewScan_rejected()));
+    this->connect(this->newScan, SIGNAL(accepted()), this, SLOT(on_NewScan_accepted()));
+    /*
     */
 }
 
@@ -81,4 +79,7 @@ void ScanTabWidget::on_tabWidget_tabCloseRequested(int index)
     QWidget* page = this->widget(index);
     this->removeTab(index);
     delete page;
+
+    if (this->count() == 0)
+        emit haveOpenScans(false);
 }

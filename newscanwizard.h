@@ -18,9 +18,15 @@ class NewScanWizard : public QWizard
 public:
     explicit NewScanWizard(QWidget *parent = 0);
     ~NewScanWizard();
+
+public slots:
+    void on_currentIdChanged(int);
     
 private:
     Ui::NewScanWizard *ui;
+
+    StartScanPage* startScan;
+    ProcessListWidget* processesListWidget;
 };
 
 #endif // NEWSCANWIZARD_H

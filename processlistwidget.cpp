@@ -32,8 +32,16 @@ void ProcessListWidget::on_CellDoubleClicked(int row, int column)
     p.pid =  this->item(row, 0)->text().toInt();
     p.name = this->item(row, 1)->text();
     p.icon = this->item(row, 1)->icon();
-    emit processSelected(p);
-    emit processSelected();
+}
+
+RUNNINGPROCESS ProcessListWidget::selectedProcess()
+{
+    int row = this->currentRow();
+    RUNNINGPROCESS p;
+    p.pid =  this->item(row, 0)->text().toInt();
+    p.name = this->item(row, 1)->text();
+    p.icon = this->item(row, 1)->icon();
+    return p;
 }
 
 void ProcessListWidget::fillProcessList()
