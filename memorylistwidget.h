@@ -4,6 +4,7 @@
 #include <stdio.h>
 
 #include <QTableWidget>
+#include <QMessageBox>
 #include <QHeaderView>
 #include "MemoryScanner.h"
 
@@ -16,7 +17,7 @@ public:
 signals:
     
 public slots:
-    void scanUpdated(MemoryCell* head);
+    void scanUpdated(MemoryScanner* scan);
     
 };
 

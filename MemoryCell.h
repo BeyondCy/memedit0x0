@@ -13,15 +13,15 @@ typedef enum
 class MemoryCell
 {
 public:
-	MemoryCell(HANDLE hProc, MEMORY_BASIC_INFORMATION *meminfo, int data_size);
-	~MemoryCell(void);
+    MemoryCell(HANDLE hProc, MEMORY_BASIC_INFORMATION *meminfo, int data_size);
+    ~MemoryCell(void);
 
 	void update(SEARCH_CONDITION condition, unsigned int val);
 	bool isInSearch(unsigned int offset);
 	void removeFromSearch(unsigned int offset);
 
-	void setNext(MemoryCell* next);
-	MemoryCell* getNext();
+    void setNext(MemoryCell* next);
+    MemoryCell* getNext();
 
 	int getSize() { return this->_size; }
 	int getSearchDataSize() { return this->_searchDataSize; }
@@ -43,5 +43,5 @@ protected:
     int _matches; // number of matches in a performed search
     int _searchDataSize; // the size of the search data
 
-	MemoryCell* _next;
+    MemoryCell* _next;
 };

@@ -2,8 +2,8 @@
 #define SCANTABWIDGET_H
 
 #include <QTabWidget>
-#include <QStackedWidget>
-#include <QSignalMapper>
+#include <QStatusBar>
+#include <QLabel>
 // QMap contains better functionality than std::map
 #include <QMap>
 
@@ -16,11 +16,11 @@ class ScanTabWidget : public QTabWidget
 {
     Q_OBJECT
 public:
-    explicit ScanTabWidget(QWidget *parent = 0);
+    explicit ScanTabWidget(QWidget *parent = 0, QStatusBar* statusBar = 0);
     
 signals:
     void haveOpenScans(bool);
-    void scanUpdated(MemoryCell*);
+    void scanUpdated(MemoryScanner*);
     
 public slots:
     void on_tabWidget_tabCloseRequested(int index);
@@ -30,14 +30,17 @@ public slots:
     void on_actionNew_Scan_triggered();
     void on_NewScan_rejected();
 
+    void on_actionRefresh_triggered();
+
     void on_processSelected(RUNNINGPROCESS p, int searchSize, bool useInitial, int initialValue);
+    void on_scanUpdated(MemoryScanner *scan);
 
 private:
     QMap<int, MemoryScanner*> scanners;
     int currentScanner; // updated when user switches tabs..
 
     NewScanWizard* newScan;
-    
+    QStatusBar* statusBar;
 };
 
 #endif // SCANTABWIDGET_H

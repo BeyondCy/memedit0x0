@@ -4,6 +4,7 @@ MemoryScanner::MemoryScanner(void)
 {
     this->_hProc = NULL;
 	this->_head = NULL;
+    this->_matchCount = -1;
 }
 
 MemoryScanner::~MemoryScanner(void)
@@ -52,7 +53,7 @@ MemoryCell* MemoryScanner::startScan(unsigned int pid, int data_size)
 
 MemoryCell* MemoryScanner::updateScan(SEARCH_CONDITION condition, unsigned int val)
 {
-	MemoryCell *cell = this->_head;
+    MemoryCell *cell = this->_head;
     while (cell)
     {
 		cell->update(condition, val);
@@ -63,7 +64,12 @@ MemoryCell* MemoryScanner::updateScan(SEARCH_CONDITION condition, unsigned int v
 
 int MemoryScanner::getMatchCount()
 {
-    MemoryCell *mb = this->_head;
+    return (this->_matchCount == -1) ? this->getMatchCount(this->_head) : this->_matchCount;
+}
+
+int MemoryScanner::getMatchCount(MemoryCell *memlist)
+{
+    MemoryCell *mb = memlist;
     int count = 0;
 
     while (mb)
@@ -71,6 +77,8 @@ int MemoryScanner::getMatchCount()
         count += mb->getMatches();
         mb = mb->getNext();
     }
+
+    this->_matchCount = count;
 
     return count;
 }

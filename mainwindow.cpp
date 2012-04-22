@@ -7,9 +7,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ScanTabWidget* scanTabs = new ScanTabWidget(this);
+    ScanTabWidget* scanTabs = new ScanTabWidget(this, this->ui->statusBar);
     this->connect(scanTabs, SIGNAL(haveOpenScans(bool)), this, SLOT(on_scanTab_haveOpenScans(bool)));
     this->connect(this->ui->actionNew_Scan, SIGNAL(triggered()), scanTabs, SLOT(on_actionNew_Scan_triggered()));
+    this->connect(this->ui->actionRefresh, SIGNAL(triggered()), scanTabs, SLOT(on_actionRefresh_triggered()));
     this->setCentralWidget(scanTabs);
 }
 
@@ -52,9 +53,4 @@ void MainWindow::on_scanTab_haveOpenScans(bool havescans)
 
 }
 
-void MainWindow::scanCountUpdated(int num)
-{
-    QString s = "%d matches found.";
-    s.arg(QString::number(num));
-    this->ui->statusBar->showMessage(s);
-}
+

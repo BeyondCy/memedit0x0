@@ -16,14 +16,34 @@ MemoryListWidget::MemoryListWidget(QWidget *parent) :
     this->connect(this, SIGNAL(currentCellChanged(int,int,int,int)), this, SLOT(on_CurrentCellChanged(int,int,int,int)));
     this->connect(this, SIGNAL(cellDoubleClicked(int,int)), this, SLOT(on_CellDoubleClicked(int,int)));
 
+    this->blockSignals(true);
     //this->setSelectionBehavior(QAbstractItemView::SelectRows);
 }
 
-void MemoryListWidget::scanUpdated(MemoryCell *head)
+void MemoryListWidget::scanUpdated(MemoryScanner *scan)
 {
+    int matchcount = scan->getMatchCount();
+    if (matchcount > 1000)
+    {
+        QMessageBox m;
+        QString msg = "There are " + QString::number(matchcount) +  " cells in the search.\n\n";
+        msg += "Would you like to load the values now?\n\n";
+        msg += "Warning: this action is not reccomended until search is narrowed down.";
+        m.setText(msg);
+        m.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+        m.setDefaultButton(QMessageBox::No);
+        m.setWindowTitle("Large Data Size");
+
+        if (m.exec() != QMessageBox::Yes)
+            return;
+    }
+
     static char buffer[256];
     unsigned int offset;
-    MemoryCell *mb = head;
+    MemoryCell *mb = scan->getHead();
+
+    this->clear();
+    this->setRowCount(0);
 
     int row = 0;
     while (mb)
