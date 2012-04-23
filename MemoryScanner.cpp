@@ -81,3 +81,21 @@ int MemoryScanner::getMatchCount(MemoryCell *memlist)
 
     return count;
 }
+
+bool MemoryScanner::poke(unsigned int addr, unsigned int val)
+{
+    return (WriteProcessMemory (this->_hProc, (void*)addr, &val, this->_head->getSearchDataSize(), NULL) != 0);
+}
+
+unsigned int MemoryScanner::convert(char *s)
+{
+    int base = 10;
+
+    if (s[0] == '0' && s[1] == 'x')
+    {
+        base = 16;
+        s += 2;
+    }
+
+    return strtoul (s, NULL, base);
+}

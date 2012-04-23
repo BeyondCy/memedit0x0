@@ -22,14 +22,17 @@ void ScanTabWidget::on_tabWidget_currentChanged(int index)
 
 void ScanTabWidget::on_processSelected(RUNNINGPROCESS p, int searchSize, bool useInitial, int initialValue)
 {
+
     MemoryListWidget* memoryTable = new MemoryListWidget(this);
     int index = this->addTab(memoryTable, p.icon, p.name);
 
-    this->connect(this, SIGNAL(scanUpdated(MemoryScanner*)),
-                  this, SLOT(on_scanUpdated(MemoryScanner*)));
-
     this->setCurrentIndex(index);
     this->scanners[index] = new MemoryScanner();
+
+    memoryTable->setScanner(this->scanners[index]);
+
+    this->connect(this, SIGNAL(scanUpdated(MemoryScanner*)),
+                  this, SLOT(on_scanUpdated(MemoryScanner*)));
 
     if (this->count() == 1) // 1st open tab
         emit haveOpenScans(true);  // only need to send it once

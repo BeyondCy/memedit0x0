@@ -18,6 +18,10 @@ public:
 
     MemoryCell* getHead() { return this->_head; }
 
+    unsigned int convert(char *s);
+
+    bool poke(unsigned int addr, unsigned int val);
+
 private:
     MemoryCell* _head;
 	HANDLE _hProc; // process being scanned.

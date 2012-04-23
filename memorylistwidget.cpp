@@ -17,26 +17,42 @@ MemoryListWidget::MemoryListWidget(QWidget *parent) :
 
     //this->connect(this, SIGNAL(currentCellChanged(int,int,int,int)), this, SLOT(on_CurrentCellChanged(int,int,int,int)));
     //this->connect(this, SIGNAL(cellDoubleClicked(int,int)), this, SLOT(on_CellDoubleClicked(int,int)));
-
+    this->connect(this, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(on_itemChanged(QTableWidgetItem*)));
     //this->setSelectionBehavior(QAbstractItemView::SelectRows);
+}
+
+void MemoryListWidget::setScanner(MemoryScanner *mscan)
+{
+    this->scanner = mscan;
 }
 
 void MemoryListWidget::on_cellDoubleClicked(int r, int c)
 {
-    //this->connect(this, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(on_itemChanged(QTableWidgetItem*)));
 }
 
-void MemoryListWidget::on_itemChanged(QString item)
-{
-    int row = this->currentRow();
-    qDebug("currentrow: %d", row);
-    if (row == -1)
-        return;
-    QString addr = this->item(row, 0)->text();
-    QLineEdit* lineEdit = (QLineEdit*)this->cellWidget(row, 3);
-    int data = lineEdit->text().toInt();
-    qDebug("Write %d at %d (0x%08x)", data, addr, addr);
 
+
+void MemoryListWidget::on_itemChanged(QTableWidgetItem* item)
+{
+    int row = item->row();
+    if (row == -1) return;
+
+    //if (item->column() == 1) // is hexedit
+
+    unsigned int addr = this->scanner->convert(this->item(row, 0)->text().toAscii().data());
+    unsigned int data = this->scanner->convert(item->text().toAscii().data());
+
+    if (!this->scanner->poke(addr, data))
+    {
+        QMessageBox m;
+        m.setWindowTitle("Error");
+        m.setText("An error occurred writing to process memory.");
+        m.setStandardButtons(QMessageBox::Ok);
+        m.exec();
+        return;
+    }
+
+    qDebug("Write %d at %d (0x%08x)", data, addr, addr);
 }
 
 void MemoryListWidget::scanUpdated(MemoryScanner *scan)
@@ -64,8 +80,8 @@ void MemoryListWidget::scanUpdated(MemoryScanner *scan)
     //this->clear();
     this->setRowCount(0);
 
-    // ToDo: Block signals during a lineedit.
-    // this->blockSignals(true);
+    // Block signals while we fill in search vals
+    this->blockSignals(true);
 
     int row = 0;
     while (mb)
@@ -102,4 +118,6 @@ void MemoryListWidget::scanUpdated(MemoryScanner *scan)
 
         mb = mb->getNext();
     }
+
+    this->blockSignals(false); // re-enable signals
 }
